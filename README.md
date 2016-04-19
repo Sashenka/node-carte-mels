@@ -1,7 +1,7 @@
 Carte du réseau scolaire du Québec
 =========
 
-Cette application utilise les données ouvertes du gouvernement du Québec pour afficher une carte interactive du réseau scolaire de la province.
+Cette application utilise les données ouvertes du gouvernement du Québec pour afficher une carte interactive du réseau scolaire de la province. Elle est disponible sur Heroku ([https://murmuring-springs-57223.herokuapp.com/](https://murmuring-springs-57223.herokuapp.com/)).
 
 ## API
 
