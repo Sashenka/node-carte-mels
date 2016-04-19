@@ -1,0 +1,116 @@
+<!doctype html>
+
+<html lang="fr-CA" ng-app="carteMELS">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Carte des établissements d'enseignement du réseau scolaire au Québec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Carte des établissements d'enseignement du réseau scolaire et des limites des commissions scolaires au Québec.">
+    <meta name="author" content="Sashenka">
+    
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc3/angular-material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="https://rawgit.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body ng-controller="indexCtrl" layout="column" ng-cloak="">
+    <section layout="row" flex="">
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-whiteframe="1">
+
+            <md-content ng-controller="sideNavCtrl">
+                
+                <md-whiteframe class="md-whiteframe-1dp" flex layout layout-align="center center">
+                    <md-input-container md-no-float class="md-block container-search" flex>
+                        <md-icon md-font-icon="ion-android-search"></md-icon>
+                        <input ng-model="searchString" type="text" placeholder="Rechercher">
+                    </md-input-container>
+                </md-whiteframe>
+                
+                <md-divider></md-divider>
+                
+                <md-list flex="">
+                    <md-subheader>Réseaux</md-subheader>
+                    <md-list-item ng-repeat="r in reseau.types | filter:searchString" class="md-2-line" ng-click="selectItem(r)">
+                        <div class="md-list-item-text">
+                            <h3>{{r.descr}}</h3>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+
+                <md-list flex="">
+                    <md-subheader ng-hide="true" class="md-no-sticky">Commission scolaires</md-subheader>
+                    <div ng-repeat="t in cs.types | orderBy : 'cs.length' : reverse">
+                        <md-subheader>Commission scolaires - {{t.descr}}</md-subheader>
+                        <md-list-item ng-repeat="c in t.cs | filter:searchString" class="md-2-line" ng-click="selectItem(c)">
+                            <div class="md-list-item-text">
+                                <h3>{{c.nom_officiel_cs}}</h3>
+                                <p>{{c.code_cs}}</p>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+
+        </md-sidenav>
+
+        <md-content class="map" flex="">
+            <div class="div-map" ng-controller="mapCtrl">
+                    <md-progress-linear class="md-primary md-hue-1" md-mode="indeterminate" ng-show="loading"></md-progress-linear>
+                    <md-card class="card-info etab" ng-show="markerLayer">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <!--<span class="md-headline">Établissement</span>-->
+                                <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab || "Glissez votre curseur sur une école pour la sélectionner."}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                    
+                    <md-card class="card-info item" ng-show="selectedItemInfos">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{selectedItemInfos.nom}}</span>
+                                <span class="md-subhead" ng-show="selectedItemInfos.code">({{selectedItemInfos.code}})</span>
+                                <span class="md-subhead"><a ng-href="{{selectedItemInfos.url}}" target="_blank">{{selectedItemInfos.url}}</a></span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                    
+                <leaflet width="100%" defaults="defaults" lf-center="center" geojson="geojson"></leaflet>
+            </div>
+        </md-content>
+    </section>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+    <!-- Leaflet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <script src="https://rawgit.com/nmccready/angular-simple-logger/master/dist/angular-simple-logger.min.js"></script>
+    <script src="https://rawgit.com/angular-ui/ui-leaflet/master/dist/ui-leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+    <script src="https://rawgit.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/leaflet.markercluster.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc3/angular-material.min.js"></script>
+
+    <!-- Angular Application -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers/indexCtrl.js"></script>
+    <script src="js/controllers/mapCtrl.js"></script>
+    <script src="js/controllers/sideNavCtrl.js"></script>
+    <script src="js/services/cs.js"></script>
+    <script src="js/services/reseau.js"></script>
+    <script src="js/services/map.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+{
+    "DateMAJ": "2016-04-14",
+    "types":[{
+        "id": 1,
+        "routeParamName": "public",
+        "typeName": "INFRA_SCOL_PPS_PUBLIC_P",
+        "descr": "Réseau public"
+    },{
+        "id": 2,
+        "routeParamName": "prive",
+        "typeName": "INFRA_SCOL_PPS_PRIVE_P",
+        "descr": "Réseau privé"
+    },{
+        "id": 3,
+        "routeParamName": "gouvernemental",
+        "typeName": "INFRA_SCOL_GOUVERNEMENTAL_P",
+        "descr": "Réseau gouvernemental"
+    },{
+        "id": 4,
+        "routeParamName": "collegial",
+        "typeName": "MELS_SCOL_COLLEGIAL_P",
+        "descr": "Réseau collégial"
+    },{
+        "id": 5,
+        "routeParamName": "universitaire",
+        "typeName": "MELS_SCOL_UNIVERSITAIRE_P",
+        "descr": "Réseau universitaire"
+    }]
+}

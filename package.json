@@ -1,0 +1,28 @@
+{
+  "name": "node-hawk",
+  "version": "0.1.0",
+  "description": "Une application qui affiche une carte des Commissions scolaires et leurs établissements.",
+  "main": "server.js",
+  "repository": "",
+  "author": "Sashenka",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha test/*",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
+    "httperrors": "^2.1.0",
+    "request": "^2.71.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": "4.4.2"
+  }
+}

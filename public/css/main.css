@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic);
+
+html, body, section, md-content.map, .div-map, .angular-leaflet-map { 
+    height: 100%; 
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+md-list {
+    padding: 0;
+}
+
+.md-sidenav-left .md-subheader {
+    background-color: whitesmoke;
+}
+
+.container-search {
+    margin: 8px 15px 0 15px;
+}
+
+.card-info {
+    position: absolute;
+    z-index: 100;
+    width: 17rem;
+}
+
+    .card-info md-card-title {
+        padding: 10px;
+    }
+    
+    .card-info .md-headline {
+        font-size: 16px;
+    }
+    
+    .card-info md-card-title md-card-title-text:only-child .md-subhead {
+        padding: 0;
+    }
+    
+    .card-info md-card-title md-card-title-text:only-child .md-subhead.selectText {
+        font-size: smaller;
+        font-style: italic;
+    }
+
+
+.card-info.item {
+    bottom: 1em;
+    right: 1em;
+}
+
+.card-info.etab{
+    bottom: 7.5em;
+    right: 1em;
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	background-color: rgba(95, 158, 160, 0.6);
+	border-radius: 20px;
+	}
+.marker-cluster div {
+    background-color: rgba(66, 110, 112, 0.6);
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	color: white;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}

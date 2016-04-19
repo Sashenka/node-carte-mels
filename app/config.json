@@ -1,0 +1,8 @@
+{
+   "wfs": {
+        "name": "MSPQ",
+        "url": "https://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?VERSION=1.1.0&SERVICE=WFS",
+        "format": "application/json; subtype=geojson; charset=iso-8859-1",
+        "projection": "EPSG:4326"
+    }
+}

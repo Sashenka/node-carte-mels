@@ -1,0 +1,235 @@
+{
+    "DateMAJ": "2016-04-14",
+    "types": [{
+        "id": 1,
+        "typeName": "MELS_CS_FRANCO_S",
+        "descr": "Francophones",
+        "cs": [{
+            "code_cs": 711000,
+            "nom_officiel_cs": "CS des Monts-et-Marées"
+        }, {
+            "code_cs": 712000,
+            "nom_officiel_cs": "CS des Phares"
+        }, {
+            "code_cs": 713000,
+            "nom_officiel_cs": "CS du Fleuve-et-des-Lacs"
+        }, {
+            "code_cs": 714000,
+            "nom_officiel_cs": "CS de Kamouraska-Rivière-du-Loup"
+        }, {
+            "code_cs": 721000,
+            "nom_officiel_cs": "CS du Pays-des-Bleuets"
+        }, {
+            "code_cs": 722000,
+            "nom_officiel_cs": "CS du Lac-Saint-Jean"
+        }, {
+            "code_cs": 723000,
+            "nom_officiel_cs": "CS des Rives-du-Saguenay"
+        }, {
+            "code_cs": 724000,
+            "nom_officiel_cs": "CS De La Jonquière"
+        }, {
+            "code_cs": 731000,
+            "nom_officiel_cs": "CS de Charlevoix"
+        }, {
+            "code_cs": 732000,
+            "nom_officiel_cs": "CS de la Capitale"
+        }, {
+            "code_cs": 733000,
+            "nom_officiel_cs": "CS des Découvreurs"
+        }, {
+            "code_cs": 734000,
+            "nom_officiel_cs": "CS des Premières-Seigneuries"
+        }, {
+            "code_cs": 735000,
+            "nom_officiel_cs": "CS de Portneuf"
+        }, {
+            "code_cs": 741000,
+            "nom_officiel_cs": "CS du Chemin-du-Roy"
+        }, {
+            "code_cs": 742000,
+            "nom_officiel_cs": "CS de l'Énergie"
+        }, {
+            "code_cs": 751000,
+            "nom_officiel_cs": "CS des Hauts-Cantons"
+        }, {
+            "code_cs": 752000,
+            "nom_officiel_cs": "CS de la Région-de-Sherbrooke"
+        }, {
+            "code_cs": 753000,
+            "nom_officiel_cs": "CS des Sommets"
+        }, {
+            "code_cs": 761000,
+            "nom_officiel_cs": "CS de la Pointe-de-l'Île"
+        }, {
+            "code_cs": 762000,
+            "nom_officiel_cs": "CS de Montréal"
+        }, {
+            "code_cs": 763000,
+            "nom_officiel_cs": "CS Marguerite-Bourgeoys"
+        }, {
+            "code_cs": 771000,
+            "nom_officiel_cs": "CS des Draveurs"
+        }, {
+            "code_cs": 772000,
+            "nom_officiel_cs": "CS des Portages-de-l'Outaouais"
+        }, {
+            "code_cs": 773000,
+            "nom_officiel_cs": "CS au Coeur-des-Vallées"
+        }, {
+            "code_cs": 774000,
+            "nom_officiel_cs": "CS des Hauts-Bois-de-l'Outaouais"
+        }, {
+            "code_cs": 781000,
+            "nom_officiel_cs": "CS du Lac-Témiscamingue"
+        }, {
+            "code_cs": 782000,
+            "nom_officiel_cs": "CS de Rouyn-Noranda"
+        }, {
+            "code_cs": 783000,
+            "nom_officiel_cs": "CS  Harricana"
+        }, {
+            "code_cs": 784000,
+            "nom_officiel_cs": "CS de l'Or-et-des-Bois"
+        }, {
+            "code_cs": 785000,
+            "nom_officiel_cs": "CS du Lac-Abitibi"
+        }, {
+            "code_cs": 791000,
+            "nom_officiel_cs": "CS de l'Estuaire"
+        }, {
+            "code_cs": 792000,
+            "nom_officiel_cs": "CS du Fer"
+        }, {
+            "code_cs": 793000,
+            "nom_officiel_cs": "CS de la Moyenne-Côte-Nord"
+        }, {
+            "code_cs": 801000,
+            "nom_officiel_cs": "CS de la Baie-James"
+        }, {
+            "code_cs": 811000,
+            "nom_officiel_cs": "CS des Îles"
+        }, {
+            "code_cs": 812000,
+            "nom_officiel_cs": "CS des Chic-Chocs"
+        }, {
+            "code_cs": 813000,
+            "nom_officiel_cs": "CS René-Lévesque"
+        }, {
+            "code_cs": 821000,
+            "nom_officiel_cs": "CS de la Côte-du-Sud"
+        }, {
+            "code_cs": 822000,
+            "nom_officiel_cs": "CS des Appalaches"
+        }, {
+            "code_cs": 823000,
+            "nom_officiel_cs": "CS de la Beauce-Etchemin"
+        }, {
+            "code_cs": 824000,
+            "nom_officiel_cs": "CS des Navigateurs"
+        }, {
+            "code_cs": 831000,
+            "nom_officiel_cs": "CS de Laval"
+        }, {
+            "code_cs": 841000,
+            "nom_officiel_cs": "CS des Affluents"
+        }, {
+            "code_cs": 842000,
+            "nom_officiel_cs": "CS des Samares"
+        }, {
+            "code_cs": 851000,
+            "nom_officiel_cs": "CS de la Seigneurie-des-Mille-Îles"
+        }, {
+            "code_cs": 852000,
+            "nom_officiel_cs": "CS de la Rivière-du-Nord"
+        }, {
+            "code_cs": 853000,
+            "nom_officiel_cs": "CS des Laurentides"
+        }, {
+            "code_cs": 854000,
+            "nom_officiel_cs": "CS Pierre-Neveu"
+        }, {
+            "code_cs": 861000,
+            "nom_officiel_cs": "CS de Sorel-Tracy"
+        }, {
+            "code_cs": 862000,
+            "nom_officiel_cs": "CS de Saint-Hyacinthe"
+        }, {
+            "code_cs": 863000,
+            "nom_officiel_cs": "CS des Hautes-Rivières"
+        }, {
+            "code_cs": 864000,
+            "nom_officiel_cs": "CS Marie-Victorin"
+        }, {
+            "code_cs": 865000,
+            "nom_officiel_cs": "CS des Patriotes"
+        }, {
+            "code_cs": 866000,
+            "nom_officiel_cs": "CS du Val-des-Cerfs"
+        }, {
+            "code_cs": 867000,
+            "nom_officiel_cs": "CS des Grandes-Seigneuries"
+        }, {
+            "code_cs": 868000,
+            "nom_officiel_cs": "CS de la Vallée-des-Tisserands"
+        }, {
+            "code_cs": 869000,
+            "nom_officiel_cs": "CS des Trois-Lacs"
+        }, {
+            "code_cs": 871000,
+            "nom_officiel_cs": "CS de la Riveraine"
+        }, {
+            "code_cs": 872000,
+            "nom_officiel_cs": "CS des Bois-Francs"
+        }, {
+            "code_cs": 873000,
+            "nom_officiel_cs": "CS des Chênes"
+        }]
+    }, {
+        "id": 2,
+        "typeName": "MELS_CS_ANGLO_S",
+        "descr": "Anglophones",
+        "cs": [{
+            "code_cs": 881000,
+            "nom_officiel_cs": "CS Central Québec"
+        }, {
+            "code_cs": 882000,
+            "nom_officiel_cs": "CS Eastern Shores"
+        }, {
+            "code_cs": 883000,
+            "nom_officiel_cs": "CS Eastern Townships"
+        }, {
+            "code_cs": 884000,
+            "nom_officiel_cs": "CS Riverside"
+        }, {
+            "code_cs": 885000,
+            "nom_officiel_cs": "CS Sir-Wilfrid-Laurier"
+        }, {
+            "code_cs": 886000,
+            "nom_officiel_cs": "CS Western Québec"
+        }, {
+            "code_cs": 887000,
+            "nom_officiel_cs": "CS English-Montréal"
+        }, {
+            "code_cs": 888000,
+            "nom_officiel_cs": "CS Lester-B.-Pearson"
+        }, {
+            "code_cs": 889000,
+            "nom_officiel_cs": "CS New Frontiers"
+        }]
+    }, {
+        "id": 3,
+        "typeName": "MELS_CS_PARTICULIER_S",
+        "descr": "Particulières",
+        "cs": [{
+            "code_cs": 689000,
+            "nom_officiel_cs": "CS du Littoral"
+        }, {
+            "code_cs": 759000,
+            "nom_officiel_cs": "CS crie"
+        }, {
+            "code_cs": 769000,
+            "nom_officiel_cs": "CS Kativik"
+        }]
+    }]
+}
