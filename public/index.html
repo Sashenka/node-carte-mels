@@ -67,7 +67,7 @@
                         <md-card-title>
                             <md-card-title-text>
                                 <!--<span class="md-headline">Établissement</span>-->
-                                <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab || "Glissez votre curseur sur une école pour la sélectionner."}}</span>
+                                <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab || "Glissez votre curseur sur un établissement pour la sélectionner."}}</span>
                             </md-card-title-text>
                         </md-card-title>
                     </md-card>
@@ -75,8 +75,8 @@
                     <md-card class="card-info item" ng-show="selectedItemInfos">
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">{{selectedItemInfos.nom}}</span>
-                                <span class="md-subhead" ng-show="selectedItemInfos.code">({{selectedItemInfos.code}})</span>
+                                <span class="md-headline">{{selectedItemInfos.nom}} <small>{{selectedItemInfos.code}}</small></span>
+                                <span class="md-subhead">{{selectedItemInfos.details}}</span>
                                 <span class="md-subhead"><a ng-href="{{selectedItemInfos.url}}" target="_blank">{{selectedItemInfos.url}}</a></span>
                             </md-card-title-text>
                         </md-card-title>
@@ -86,7 +86,7 @@
             </div>
         </md-content>
     </section>
-
+    
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>

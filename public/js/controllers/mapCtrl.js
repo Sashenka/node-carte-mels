@@ -69,7 +69,7 @@ angular.module('controllers')
                         
                         $scope.selectedItemInfos = {
                             nom: response.data.features[0].properties.nom_officiel_cs,
-                            code: response.data.features[0].properties.code_cs,
+                            code: '(' + response.data.features[0].properties.code_cs + ') ',
                             url: response.data.features[0].properties.site_web
                         };
                         
@@ -77,9 +77,9 @@ angular.module('controllers')
                     })
                     .then(function(response) {
                         fnDrawMarkers(response.data);
+                        $scope.selectedItemInfos.details = response.data.features.length + ' établissements';
                     }, function error (err){
-                        //Gerer erreur
-                        console.log(err);
+                        fnShowErrorToast(err.statusText + ' ('+ err.status + ') - ' + err.data);
                     }).finally(function(){
                         $scope.loading = false;
                     });
@@ -91,11 +91,11 @@ angular.module('controllers')
                         
                         $scope.selectedItemInfos = {
                             nom: newValue.descr,
+                            details: response.data.features.length + ' établissements',
                             url: 'http://www.education.gouv.qc.ca/'
                         };
                     }, function error (err){
-                        //Gerer erreur
-                        console.log(err);
+                        fnShowErrorToast(err.statusText + ' ('+ err.status + ') - ' + err.data);
                     }).finally(function(){
                         $scope.loading = false;
                     });
@@ -152,8 +152,8 @@ angular.module('controllers')
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(sErrorMessage)
-                    .action('CLOSE')
-                    .position('top right' )
+                    .action('FERMER')
+                    .position('top right')
                     .hideDelay(0)
             );
         }

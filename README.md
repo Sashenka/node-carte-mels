@@ -49,3 +49,9 @@ GET /api/reseau/collegial
 
 ## Site Web
 Le site web est assez simple. L'utilisateur peut choisir un réseau ou une Commission scolaire. Si une Commission scolaire est choisie, le polygone de ses limite géographiques sera dessiné sur la map et les marqueurs d'établissements rajoutés ensuite. Pour les réseaux, seuls les marqueurs d'établissements sont rajoutés puisque leur territoire est l'ensemble du Québec.
+
+## Liens utiles
+
+* Données ouvertes du gouvernement du Québec - [[LIEN]](https://www.donneesquebec.ca/fr/)
+* La documentation d'un serveur WFS - [[LIEN]](http://docs.geoserver.org/stable/en/user/services/wfs/reference.html)
+* La documentation sur les projections disponibles - [[LIEN]](http://spatialreference.org/)
