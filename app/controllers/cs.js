@@ -11,7 +11,7 @@ exports.get = function(req, res, next) {
 };
 
 exports.getLimites = function(req, res, next) {
-    Feature.get(req.oCS.typeName, {
+    Feature.get(req.url, req.oCS.typeName, {
         sPropertyName: 'code_cs',
         sPropertyValue: req.oCS.code_cs
     }).pipe(res);
@@ -20,7 +20,7 @@ exports.getLimites = function(req, res, next) {
 exports.getEtablissements = function(req, res, next) {
     var reseauPublic = MELS_RESEAUX.types[0];
     
-    Feature.get(reseauPublic.typeName, {
+    Feature.get(req.url, reseauPublic.typeName, {
         sPropertyName: 'commission_scolaire',
         sPropertyValue: req.oCS.nom_officiel_cs
     }).pipe(res);

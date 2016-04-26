@@ -2,6 +2,7 @@ var _ = require('underscore'),
     httpErrors = require('httperrors'),
     
     MELS_CS = require('../models/MELS_CS.json'),
+    Cache = require('../utils/cache'),
     CS = require('../controllers/cs');
     
 /**
@@ -45,6 +46,7 @@ function fnGetCS(req, res, next, iCodeCS) {
 }
 
 module.exports = function(router) {
+    router.all('/cs/*', Cache.get);
     router.param('iCodeCS', fnGetCS);
     
     router
