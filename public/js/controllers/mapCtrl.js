@@ -131,7 +131,14 @@ angular.module('controllers')
                         onEachFeature: function(feature, layer) {
                             layer.on({
                                 mouseover: function() {
-                                    $scope.selectedEtab = feature.properties.nom_immeuble || feature.properties.nom;
+                                    $scope.selectedEtab = {
+                                        nom: feature.properties.nom_immeuble || feature.properties.nom,
+                                        adresse: {
+                                            adr: feature.properties.adresse,
+                                            municipalite: feature.properties.municipalité,
+                                            cp: feature.properties.code_postal
+                                        }
+                                    };
                                 },
                                 mouseout: function() {
                                     $scope.selectedEtab = null;

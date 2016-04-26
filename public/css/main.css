@@ -8,6 +8,11 @@ html, body, section, md-content.map, .div-map, .angular-leaflet-map {
   display: none !important;
 }
 
+address {
+    font-size: small;
+    margin-top: 5px;
+}
+
 md-list {
     padding: 0;
 }

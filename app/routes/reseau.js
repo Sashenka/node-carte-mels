@@ -4,18 +4,29 @@ var _ = require('underscore'),
     MELS_RESEAUX = require('../models/MELS_RESEAUX.json'),
     Reseau = require('../controllers/reseau');
 
-module.exports = function(router) {
-    //Reseaux
-    router.param('sType', function(req, res, next, sType){
-        var oReseau = _.findWhere(MELS_RESEAUX.types, {routeParamName: sType});
-        
-        if(!oReseau){
-            return next(new httpErrors.NotFound({message: 'Aucun réseau trouvée.', parameters: req.params}));
-        }
-        
-        req.oReseau = oReseau;
-        next();
+/**
+ * Trouve et retourne le réseau spécifié par sType dans le fichier MELS_RESEAUX.json.
+ * @param {string} sType
+ * @return {object} oReseau.
+ */
+function fnGetReseau(req, res, next, sType) {
+    var oReseau = _.findWhere(MELS_RESEAUX.types, {
+        routeParamName: sType
     });
+
+    if (!oReseau) {
+        return next(new httpErrors.NotFound({
+            message: 'Aucun réseau trouvée.',
+            parameters: req.params
+        }));
+    }
+
+    req.oReseau = oReseau;
+    next();
+}
+
+module.exports = function(router) {
+    router.param('sType', fnGetReseau);
     
     router
         .route('/reseau')

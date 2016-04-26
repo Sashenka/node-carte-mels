@@ -6,7 +6,5 @@ exports.getAllReseaux = function(req, res, next) {
 };
 
 exports.getReseau = function (req, res, next){
-    Feature.get(req.oReseau.typeName, function(data) {
-        return res.json(data);
-    }).pipe(res);
+    Feature.get(req.oReseau.typeName).pipe(res);
 };

@@ -1,15 +1,14 @@
 {
   "name": "node-carte-mels",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Cette application utilise les données ouvertes du gouvernement du Québec pour afficher une carte interactive du réseau scolaire de la province.",
   "main": "server.js",
-  "repository": "",
-  "author": "Sashenka",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/sashenka/node-gorkon"
   },
+  "author": "Sashenka",
+  "license": "MIT",
   "scripts": {
     "test": "mocha test/*",
     "start": "node server.js"

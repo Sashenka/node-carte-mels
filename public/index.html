@@ -67,7 +67,12 @@
                         <md-card-title>
                             <md-card-title-text>
                                 <!--<span class="md-headline">Établissement</span>-->
-                                <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab || "Glissez votre curseur sur un établissement pour la sélectionner."}}</span>
+                                <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab.nom || "Glissez votre curseur sur un établissement pour la sélectionner."}}</span>
+                                <address ng-hide="!selectedEtab.adresse.adr">
+                                    {{selectedEtab.adresse.adr}}<br>
+                                    {{selectedEtab.adresse.municipalite}}, QC<br>
+                                    {{selectedEtab.adresse.cp}}
+                                </address>
                             </md-card-title-text>
                         </md-card-title>
                     </md-card>
