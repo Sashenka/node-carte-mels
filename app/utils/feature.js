@@ -51,9 +51,7 @@ function buildUrl(sTypeName, optionalFilter) {
 exports.get = function(sReqURL, sTypeName, optionalFilter) {
     var sURL = buildUrl(sTypeName, optionalFilter);
     
-    var streamRequest = request.get(sURL).on('error', function(error) {
-        console.log('erreur:' + error);
-    }).on('response', function(response) {
+    var streamRequest = request.get(sURL).on('response', function(response) {
         delete response.headers['content-disposition'];
     });
     

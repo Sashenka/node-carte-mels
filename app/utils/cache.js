@@ -1,12 +1,16 @@
 var redis = require('redis');
 require('redis-streams')(redis);
 
-var client = redis.createClient(6379, process.env.IP, {
+var client = redis.createClient(process.env.REDIS_URL, {
     return_buffers: true
 });
 
 exports.get = function(req, res, next) {
     var sKey = req.url;
+    
+    if(req.query.nocache){
+        return next();
+    }
 
     client.exists(sKey, function(err, exists) {
         if (err) {

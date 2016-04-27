@@ -1,7 +1,7 @@
 Carte du réseau scolaire du Québec
 =========
 
-Cette application utilise les données ouvertes du gouvernement du Québec pour afficher une carte interactive du réseau scolaire de la province. Elle est disponible sur Heroku ([https://murmuring-springs-57223.herokuapp.com/](https://murmuring-springs-57223.herokuapp.com/)).
+Cette application utilise les données ouvertes du gouvernement du Québec pour afficher une carte interactive du réseau scolaire de la province. Elle est disponible sur Heroku à l'adresse suivante: ([https://murmuring-springs-57223.herokuapp.com/](https://murmuring-springs-57223.herokuapp.com/)).
 
 ## API
 
@@ -46,6 +46,9 @@ Exemple:
 ```
 GET /api/reseau/collegial
 ```
+
+### Cache
+Pour minimiser l'impact sur le serveur WFS et améliorer la performance, les requêtes sont cachés pendant 1 minute. Le paramètre ```nocache=1``` peut-être envoyé avec la requête pour ignorer le cache.
 
 ## Site Web
 Le site web est assez simple. L'utilisateur peut choisir un réseau ou une Commission scolaire. Si une Commission scolaire est choisie, le polygone de ses limite géographiques sera dessiné sur la map et les marqueurs d'établissements rajoutés ensuite. Pour les réseaux, seuls les marqueurs d'établissements sont rajoutés puisque leur territoire est l'ensemble du Québec.

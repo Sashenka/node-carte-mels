@@ -1,5 +1,4 @@
 var _ = require('underscore'),
-    httpErrors = require('httperrors'),
     
     MELS_CS = require('../models/MELS_CS.json'),
     Cache = require('../utils/cache'),
@@ -14,10 +13,13 @@ function fnGetCS(req, res, next, iCodeCS) {
     var oCS;
 
     if (isNaN(iCodeCS)) {
-        return next(new httpErrors.BadRequest({
-            message: 'Le code de la Commission scolaire doit être un nombre entier.',
-            parameters: req.params
-        }));
+        return next({
+            statusCode: 400,
+            parameters: req.params,
+            error: {
+                message: 'Le code de la Commission scolaire doit être un nombre entier.'
+            }
+        });
     }
 
     _.each(MELS_CS.types, function(type) {
@@ -35,10 +37,13 @@ function fnGetCS(req, res, next, iCodeCS) {
     });
 
     if (!oCS) {
-        return next(new httpErrors.NotFound({
-            message: 'Aucune Commission scolaire trouvée.',
-            parameters: req.params
-        }));
+        return next({
+            statusCode: 404,
+            parameters: req.params,
+            error: {
+                message: 'Aucune Commission scolaire trouvée.'
+            }
+        });
     }
 
     req.oCS = oCS;

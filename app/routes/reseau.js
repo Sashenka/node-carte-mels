@@ -1,5 +1,4 @@
 var _ = require('underscore'),
-    httpErrors = require('httperrors'),
     
     MELS_RESEAUX = require('../models/MELS_RESEAUX.json'),
     Cache = require('../utils/cache'),
@@ -16,10 +15,13 @@ function fnGetReseau(req, res, next, sType) {
     });
 
     if (!oReseau) {
-        return next(new httpErrors.NotFound({
-            message: 'Aucun réseau trouvée.',
-            parameters: req.params
-        }));
+        return next({
+            statusCode: 404,
+            parameters: req.params,
+            error: {
+                message: 'Aucun réseau trouvée.'
+            }
+        });
     }
 
     req.oReseau = oReseau;
