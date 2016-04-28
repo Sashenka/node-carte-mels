@@ -1,4 +1,5 @@
 var request = require('request'),
+    Cache = require('./cache'),
     config = require('../config.json');
 
 /**
@@ -40,18 +41,22 @@ function buildUrl(sTypeName, optionalFilter) {
 
 /**
  * Interroge le serveur WFS avec une requête GET et le URL construit par la fonction buildUrl. Se charge aussi d'enlever 'content-disposition' des headers pour avoir une reponse en JSON au lieu d'un fichier à télécharger.
+ * @param {string} sReqURL
  * @param {string} sTypeName
  * @param {Object} optionalFilter (Optional)
  *      @option {string} sPropertyName
  *      @option {string} sPropertyValue 
  * @return {object} L'objet de type Request.
  */
-exports.get = function(sTypeName, optionalFilter) {
+exports.get = function(sReqURL, sTypeName, optionalFilter) {
     var sURL = buildUrl(sTypeName, optionalFilter);
     
-    return request.get(sURL).on('error', function(error) {
-        console.log('erreur:' + error);
-    }).on('response', function(response) {
+    var streamRequest = request.get(sURL).on('response', function(response) {
         delete response.headers['content-disposition'];
     });
+    
+    Cache.set(sReqURL, streamRequest);
+    
+    return streamRequest;
+    
 };

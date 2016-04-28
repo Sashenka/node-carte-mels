@@ -23,6 +23,9 @@ angular.module('controllers')
                         weight: 10,
                         color: '#800000',
                         opacity: 1
+                    },
+                    tileLayerOptions: {
+                        attribution: 'Carte MELS v1.3.0 | Visitez ce projet sur <span aria-hidden="true" data-icon="&#xf233;"></span> <a href="https://github.com/Sashenka/node-carte-mels" target="_blank">GitHub</a>' //© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
                     }
                 },
                 center: {
@@ -35,6 +38,7 @@ angular.module('controllers')
             $timeout(function() {
                 leafletData.getMap().then(function(map) {
                     map.invalidateSize(false);
+                    //map.attributionControl.setPrefix(false);
                 });
             }, 200);
         }

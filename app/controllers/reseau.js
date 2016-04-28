@@ -6,5 +6,12 @@ exports.getAllReseaux = function(req, res, next) {
 };
 
 exports.getReseau = function (req, res, next){
-    Feature.get(req.oReseau.typeName).pipe(res);
+    Feature.get(req.url, req.oReseau.typeName)
+        .on('error', function(err) {
+            return next({
+                statusCode: 500,
+                error: err,
+                parameters: req.params
+            });
+        }).pipe(res);
 };

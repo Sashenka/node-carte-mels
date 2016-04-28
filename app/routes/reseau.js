@@ -1,9 +1,9 @@
 var _ = require('underscore'),
-    httpErrors = require('httperrors'),
     
     MELS_RESEAUX = require('../models/MELS_RESEAUX.json'),
+    Cache = require('../utils/cache'),
     Reseau = require('../controllers/reseau');
-
+    
 /**
  * Trouve et retourne le réseau spécifié par sType dans le fichier MELS_RESEAUX.json.
  * @param {string} sType
@@ -15,10 +15,13 @@ function fnGetReseau(req, res, next, sType) {
     });
 
     if (!oReseau) {
-        return next(new httpErrors.NotFound({
-            message: 'Aucun réseau trouvée.',
-            parameters: req.params
-        }));
+        return next({
+            statusCode: 404,
+            parameters: req.params,
+            error: {
+                message: 'Aucun réseau trouvée.'
+            }
+        });
     }
 
     req.oReseau = oReseau;
@@ -26,6 +29,7 @@ function fnGetReseau(req, res, next, sType) {
 }
 
 module.exports = function(router) {
+    router.all('/reseau/*', Cache.get);
     router.param('sType', fnGetReseau);
     
     router

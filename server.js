@@ -36,9 +36,9 @@ server.use('/api', router);
 server.use(function(err, req, res, next) {
     res.status(err.statusCode).json({
         statusCode: err.statusCode,
-        type: err.name,
-        message: err.message,
-        parameters: err.parameters
+        message: err.error.message,
+        parameters: err.parameters,
+        details: err.error
     });
 });
 
