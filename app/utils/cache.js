@@ -20,6 +20,7 @@ exports.get = function(req, res, next) {
 
         if (exists) {
             res.set('content-type', 'application/json; subtype=geojson; charset=iso-8859-1');
+            res.set('X-CACHED-RESPONSE', '1');
             return client.readStream(sKey).pipe(res);
         }
 
@@ -28,5 +29,5 @@ exports.get = function(req, res, next) {
 };
 
 exports.set = function(sKey, sStream) {
-    sStream.pipe(client.writeStream(sKey, 60));
+    sStream.pipe(client.writeStream(sKey, 300));
 };

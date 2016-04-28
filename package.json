@@ -1,6 +1,6 @@
 {
   "name": "node-carte-mels",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Cette application utilise les données ouvertes du gouvernement du Québec pour afficher une carte interactive du réseau scolaire de la province.",
   "main": "server.js",
   "repository": {
@@ -10,7 +10,7 @@
   "author": "Sashenka",
   "license": "MIT",
   "scripts": {
-    "test": "mocha test/*",
+    "test": "mocha test/* -t 5000",
     "start": "node server.js"
   },
   "dependencies": {

@@ -48,7 +48,7 @@ GET /api/reseau/collegial
 ```
 
 ### Cache
-Pour minimiser l'impact sur le serveur WFS et améliorer la performance, les requêtes sont cachés pendant 1 minute. Le paramètre ```nocache=1``` peut-être envoyé avec la requête pour ignorer le cache.
+Pour minimiser l'impact sur le serveur WFS et améliorer la performance, les requêtes sont cachés pendant 5 minute. Les réponses du cache auront le header ```x-cached-response```. Le paramètre ```nocache=1``` peut-être envoyé avec la requête pour ignorer le cache.
 
 ## Site Web
 Le site web est assez simple. L'utilisateur peut choisir un réseau ou une Commission scolaire. Si une Commission scolaire est choisie, le polygone de ses limite géographiques sera dessiné sur la map et les marqueurs d'établissements rajoutés ensuite. Pour les réseaux, seuls les marqueurs d'établissements sont rajoutés puisque leur territoire est l'ensemble du Québec.
