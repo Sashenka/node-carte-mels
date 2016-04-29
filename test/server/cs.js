@@ -56,6 +56,17 @@ describe('GET /cs/:iCodeCS/limites', function() {
 
 });
 
+describe('GET /cs/:iCodeCS/limites - CACHED', function() {
+    it('retourne les limites géographiques de la Commission Scolaire qui correspond au code passé en paramètre', function(done) {
+        request(app)
+            .get('/api/cs/864000/limites')
+            .expect('X-CACHED-RESPONSE', 1)
+            .expect('Content-Type', /geojson/)
+            .expect(200, done);
+    });
+
+});
+
 
 describe('GET /cs/:iCodeCS/etablissements', function() {
     it('erreur 400 si le paramètre n\'est pas un entier (int)', function(done) {
@@ -73,6 +84,17 @@ describe('GET /cs/:iCodeCS/etablissements', function() {
                 res.body.should.have.all.keys('type', 'crs', 'features');
                 res.body.features[0].properties.should.have.all.keys('commission_scolaire', 'nom_immeuble');
               })
+            .expect(200, done);
+    });
+
+});
+
+describe('GET /cs/:iCodeCS/etablissements - CACHED', function() {
+    it('retourne les limites géographiques de la Commission Scolaire qui correspond au code passé en paramètre', function(done) {
+        request(app)
+            .get('/api/cs/864000/etablissements')
+            .expect('X-CACHED-RESPONSE', 1)
+            .expect('Content-Type', /geojson/)
             .expect(200, done);
     });
 

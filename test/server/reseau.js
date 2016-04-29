@@ -38,3 +38,15 @@ describe('GET /reseau/:sType', function() {
         });
     });
 });
+
+describe('GET /reseau/:sType - CACHED', function() {
+    MELS_RESEAUX.types.forEach(function(element) {
+        it('retourne les points géographiques des établissements du réseau: ' + element.descr, function(done) {
+            request(app)
+                .get('/api/reseau/' + element.routeParamName)
+                .expect('X-CACHED-RESPONSE', 1)
+                .expect('Content-Type', /geojson/)
+                .expect(200, done);
+        });
+    });
+});
