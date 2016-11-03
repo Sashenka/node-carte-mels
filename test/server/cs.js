@@ -82,7 +82,7 @@ describe('GET /cs/:iCodeCS/etablissements', function() {
             .expect('Content-Type', /geojson/)
             .expect(function(res) {
                 res.body.should.have.all.keys('type', 'crs', 'features');
-                res.body.features[0].properties.should.have.all.keys('commission_scolaire', 'nom_immeuble');
+                res.body.features[0].properties.should.have.any.keys('commission_scolaire', 'nom_immeuble');
               })
             .expect(200, done);
     });

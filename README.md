@@ -5,10 +5,10 @@ Cette application utilise les données ouvertes du gouvernement du Québec pour 
 
 ## API
 
-### Commission scolaires
+### Commissions scolaires
 
 #### GET /api/cs
-Retourne une liste des Commission scolaires du Québec, cette liste est maintenue manuellement dans un [fichier JSON](app/models/MELS_CS.json).
+Retourne une liste des Commissions scolaires du Québec, cette liste est maintenue manuellement dans un [fichier JSON](app/models/MELS_CS.json).
 
 #### GET /api/cs/:CodeCS
 Retourne une Commission scolaire spécifié par son Code CS. Par exemple, la CS Marie-Victorin est identifié par le code 864000.
@@ -56,8 +56,9 @@ Le site web est assez simple. L'utilisateur peut choisir un réseau ou une Commi
 ## Liens utiles
 
 * Données ouvertes du gouvernement du Québec - [[LIEN]](https://www.donneesquebec.ca/fr/)
-* La documentation d'un serveur WFS - [[LIEN]](http://docs.geoserver.org/stable/en/user/services/wfs/reference.html)
-* La documentation sur les projections disponibles - [[LIEN]](http://spatialreference.org/)
+* Ministère de l'Éducation et de l'Enseignement supérieur du Québec - [[LIEN]](http://www.education.gouv.qc.ca/)
+* La documentation d'un serveur WFS (en anglais) - [[LIEN]](http://docs.geoserver.org/stable/en/user/services/wfs/reference.html)
+* La documentation sur les projections disponibles (en anglais) - [[LIEN]](http://spatialreference.org/)
 
 ## License
 The MIT License (MIT)

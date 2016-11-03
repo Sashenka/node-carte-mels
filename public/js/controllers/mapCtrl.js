@@ -2,10 +2,13 @@
 /*global L */
 
 angular.module('controllers')
-    .controller('mapCtrl', ['$scope', '$timeout', '$mdToast', 'leafletData', 'CommScol', 'Reseau', function($scope, $timeout, $mdToast, leafletData, CommScol, Reseau) {
+    .controller('mapCtrl', ['$scope', '$timeout', '$mdToast', '$mdSidenav', 'leafletData', 'CommScol', 'Reseau', function($scope, $timeout, $mdToast, $mdSidenav, leafletData, CommScol, Reseau) {
         $scope.loading = false;
         $scope.markerLayer = null;
         $scope.geojson = null;
+        $scope.listeEtablissements = null;
+        
+        $scope.toggleSideNav = fnToggleSideNav;
         
         $scope.$watch('selectedItem', fnWatchSelection);
         
@@ -19,13 +22,14 @@ angular.module('controllers')
                     tileLayer: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                     maxZoom: 14,
                     minZoom: 4,
+                    attributionControl: false,
                     path: {
                         weight: 10,
                         color: '#800000',
                         opacity: 1
                     },
                     tileLayerOptions: {
-                        attribution: 'Carte MELS v1.3.0 | Visitez ce projet sur <span aria-hidden="true" data-icon="&#xf233;"></span> <a href="https://github.com/Sashenka/node-carte-mels" target="_blank">GitHub</a>' //© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
+                        attribution: 'Carte MELS v1.4.0 | Visitez ce projet sur <span aria-hidden="true" data-icon="&#xf233;"></span> <a href="https://github.com/Sashenka/node-carte-mels" target="_blank">GitHub</a>' //© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
                     }
                 },
                 center: {
@@ -38,7 +42,9 @@ angular.module('controllers')
             $timeout(function() {
                 leafletData.getMap().then(function(map) {
                     map.invalidateSize(false);
+                    
                     //map.attributionControl.setPrefix(false);
+                    L.control.attribution({position: 'bottomleft'}).addTo(map);
                 });
             }, 200);
         }
@@ -52,6 +58,7 @@ angular.module('controllers')
                 $scope.markerLayer.clearLayers();
             }
             
+            $scope.listeEtablissements = [];
             $scope.geojson = null;
             $scope.loading = true;
             
@@ -83,7 +90,8 @@ angular.module('controllers')
                         fnDrawMarkers(response.data);
                         $scope.selectedItemInfos.details = response.data.features.length + ' établissements';
                     }, function error (err){
-                        fnShowErrorToast(err.statusText + ' ('+ err.status + ') - ' + err.data);
+                        console.log(err);
+                        fnShowErrorToast(err.statusText + ' ('+ err.status + ') - ' + err.data.message);
                     }).finally(function(){
                         $scope.loading = false;
                     });
@@ -99,7 +107,7 @@ angular.module('controllers')
                             url: 'http://www.education.gouv.qc.ca/'
                         };
                     }, function error (err){
-                        fnShowErrorToast(err.statusText + ' ('+ err.status + ') - ' + err.data);
+                        fnShowErrorToast(err.statusText + ' ('+ err.status + ') - ' + err.data.message);
                     }).finally(function(){
                         $scope.loading = false;
                     });
@@ -129,20 +137,27 @@ angular.module('controllers')
                                     markerColor: 'cadetblue',
                                     prefix: 'ion'
                                 }),
-                                title: feature.properties.nom_immeuble || feature.properties.nom
+                                title: feature.properties.nom || feature.properties.nom_École
                             });
                         },
                         onEachFeature: function(feature, layer) {
+                            var codePostal = feature.properties.code_postal || feature.properties.code_postal_École;
+                            codePostal = codePostal.slice(0, 3) + ' ' + codePostal.slice(3);
+                            
+                            var formattedFeature = {
+                                nom: feature.properties.nom || feature.properties.nom_École,
+                                adresse: {
+                                    adr: feature.properties.adresse || feature.properties.adresse_École,
+                                    municipalite: feature.properties.municipalité || feature.properties.municipalité_École || feature.properties.code_mun,
+                                    cp: codePostal
+                                }
+                            };
+                            
+                            $scope.listeEtablissements.push(formattedFeature);
+                            
                             layer.on({
                                 mouseover: function() {
-                                    $scope.selectedEtab = {
-                                        nom: feature.properties.nom_immeuble || feature.properties.nom,
-                                        adresse: {
-                                            adr: feature.properties.adresse,
-                                            municipalite: feature.properties.municipalité,
-                                            cp: feature.properties.code_postal
-                                        }
-                                    };
+                                    $scope.selectedEtab = formattedFeature;
                                 },
                                 mouseout: function() {
                                     $scope.selectedEtab = null;
@@ -153,9 +168,11 @@ angular.module('controllers')
                     .addTo(markers);
                     
                     map.addLayer(markers);
-                    map.fitBounds(markers.getBounds());
+                    map.fitBounds(markers.getBounds(), {padding: [100, 100]});
                     
                     $scope.markerLayer = markers;
+                    
+                    $mdSidenav('right').open();
             });
         }
         
@@ -169,31 +186,8 @@ angular.module('controllers')
             );
         }
         
-        /*
-        function fnCentrer() {
-            leafletData.getMap().then(function(map) {
-                var latlngs = [];
-                var points;
-                
-                if($scope.geojson.data.features[0].geometry.coordinates.length == 1){
-                    for (var i in $scope.geojson.data.features[0].geometry.coordinates) {
-                        points = $scope.geojson.data.features[0].geometry.coordinates[i];
-                        for (var k in points) {
-                            latlngs.push(L.GeoJSON.coordsToLatLng(points[k]));
-                        }
-                    }
-                } else {
-                    for (var i in $scope.geojson.data.features[0].geometry.coordinates) {
-                        var coord = $scope.geojson.data.features[0].geometry.coordinates[i];
-                        for (var j in coord) {
-                            latlngs.push(L.GeoJSON.coordsToLatLng(coord[j]));
-                        }
-                    }
-                }
-                
-                map.fitBounds(latlngs);
-            });
+        function fnToggleSideNav(){
+            $mdSidenav('right').toggle();
         }
-        */
         
     }]);

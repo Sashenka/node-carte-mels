@@ -17,6 +17,22 @@ md-list {
     padding: 0;
 }
 
+md-toast {
+    z-index: 500;
+}
+
+.md-sidenav-right {
+    z-index: 500;
+}
+    .md-sidenav-right md-toolbar .toolbar-title {
+        font-size: 18px;
+    }
+
+.list-etablissements .md-list-item-text{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 [data-icon]:before {
    font-family: Ionicons; 
    content: attr(data-icon);
@@ -33,7 +49,7 @@ md-list {
 
 .card-info {
     position: absolute;
-    z-index: 100;
+    z-index: 500;
     width: 17rem;
 }
 
@@ -57,20 +73,31 @@ md-list {
 
 .card-info.item {
     bottom: 1em;
-    right: 1em;
+    /*right: 1em;*/
 }
 
 .card-info.etab{
     bottom: 7.5em;
+    /*right: 1em;*/
+}
+
+.button-open-sidenav {
+    position: absolute;
+    z-index: 500;
+    font-size: 20px;
+    
+    top: 0.5em;
     right: 1em;
 }
 
 .marker-cluster {
 	background-clip: padding-box;
+	background-color: #5f9ea0;
 	background-color: rgba(95, 158, 160, 0.6);
 	border-radius: 20px;
 }
     .marker-cluster div {
+        background-color: #426e70;
         background-color: rgba(66, 110, 112, 0.6);
     	width: 30px;
     	height: 30px;
@@ -81,7 +108,8 @@ md-list {
     	border-radius: 15px;
     	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
     	color: white;
-    	}
+    }
+    
     .marker-cluster span {
     	line-height: 30px;
     }

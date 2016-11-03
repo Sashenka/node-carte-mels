@@ -6,6 +6,7 @@ var request = require('request'),
  * Remplace les caractères diacritiques par * pour la requête sur le serveur WFS avec le paramètres qPropertyValue.
  * http://jsperf.com/diacritics/12
  * @param {string} sString
+ * @deprecated since version 1.4.0
  * @return {string} sString avec les caractères diacritiques remplacés par *.
  */
 function replaceDiacritics(sString) {
@@ -33,10 +34,10 @@ function buildUrl(sTypeName, optionalFilter) {
         sFilter = '';
 
     if (optionalFilter) {
-        sFilter = "&FILTER=<Filter><PropertyIsLike wildcard='*' singleChar='.' escape='!'><PropertyName>" + optionalFilter.sPropertyName + "</PropertyName><Literal>" + replaceDiacritics(optionalFilter.sPropertyValue) + "</Literal></PropertyIsLike></Filter>";
+        sFilter = "&FILTER=<Filter><PropertyIsEqualTo><PropertyName>" + optionalFilter.sPropertyName + "</PropertyName><Literal>" + optionalFilter.sPropertyValue + "</Literal></PropertyIsEqualTo></Filter>";
     }
 
-    return encodeURI(sBaseUrl + '&REQUEST=getFeature&TYPENAME=' + sTypeName + sFilter + '&srsName=' + sProjection + '&outputFormat=' + sFormat);
+    return sBaseUrl + '&REQUEST=getFeature&TYPENAME=' + sTypeName + sFilter + '&srsName=' + sProjection + '&outputFormat=' + sFormat;
 }
 
 /**

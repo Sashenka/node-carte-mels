@@ -27,8 +27,8 @@ exports.getEtablissements = function(req, res, next) {
     var reseauPublic = MELS_RESEAUX.types[0];
     
     Feature.get(req.url, reseauPublic.typeName, {
-        sPropertyName: 'commission_scolaire',
-        sPropertyValue: req.oCS.nom_officiel_cs
+        sPropertyName: 'code_cs',
+        sPropertyValue: req.oCS.code_cs
     }).on('error', function(err) {
         return next({
             statusCode: 500,
@@ -36,4 +36,5 @@ exports.getEtablissements = function(req, res, next) {
             parameters: req.params
         });
     }).pipe(res);
+    
 };

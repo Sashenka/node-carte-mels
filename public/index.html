@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Carte des établissements d'enseignement du réseau scolaire et des limites des commissions scolaires au Québec.">
     <meta name="author" content="Sashenka">
-    
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc3/angular-material.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
-    <link rel="stylesheet" href="https://rawgit.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.css" />
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -23,16 +23,16 @@
         <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-whiteframe="1">
 
             <md-content ng-controller="sideNavCtrl">
-                
+
                 <md-whiteframe class="md-whiteframe-1dp" flex layout layout-align="center center">
                     <md-input-container md-no-float class="md-block container-search" flex>
                         <md-icon md-font-icon="ion-android-search"></md-icon>
                         <input ng-model="searchString" type="text" placeholder="Rechercher">
                     </md-input-container>
                 </md-whiteframe>
-                
+
                 <md-divider></md-divider>
-                
+
                 <md-list flex="">
                     <md-subheader>Réseaux</md-subheader>
                     <md-list-item ng-repeat="r in reseau.types | filter:searchString" class="md-2-line" ng-click="selectItem(r)">
@@ -60,53 +60,88 @@
 
         </md-sidenav>
 
-        <md-content class="map" flex="">
-            <div class="div-map" ng-controller="mapCtrl">
-                    <md-progress-linear class="md-primary md-hue-1" md-mode="indeterminate" ng-show="loading"></md-progress-linear>
-                    <md-card class="card-info etab" ng-show="markerLayer">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <!--<span class="md-headline">Établissement</span>-->
-                                <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab.nom || "Glissez votre curseur sur un établissement pour la sélectionner."}}</span>
-                                <address ng-hide="!selectedEtab.adresse.adr">
+        <md-content class="map" flex="" ng-controller="mapCtrl">
+            <div class="div-map">
+                <md-progress-linear class="md-primary" md-mode="indeterminate" ng-show="loading"></md-progress-linear>
+                <md-card class="card-info etab" ng-show="markerLayer">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-subhead" ng-class="{'selectText': !selectedEtab}">{{selectedEtab.nom || "Glissez votre curseur sur un établissement pour le sélectionner."}}</span>
+                            <address ng-hide="!selectedEtab.adresse.adr">
                                     {{selectedEtab.adresse.adr}}<br>
                                     {{selectedEtab.adresse.municipalite}}, QC<br>
                                     {{selectedEtab.adresse.cp}}
                                 </address>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </md-card>
-                    
-                    <md-card class="card-info item" ng-show="selectedItemInfos">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-headline">{{selectedItemInfos.nom}} <small>{{selectedItemInfos.code}}</small></span>
-                                <span class="md-subhead">{{selectedItemInfos.details}}</span>
-                                <span class="md-subhead"><a ng-href="{{selectedItemInfos.url}}" target="_blank">{{selectedItemInfos.url}}</a></span>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </md-card>
-                    
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+
+                <md-card class="card-info item" ng-show="selectedItemInfos">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{selectedItemInfos.nom}} <small>{{selectedItemInfos.code}}</small></span>
+                            <span class="md-subhead">{{selectedItemInfos.details}}</span>
+                            <span class="md-subhead"><a ng-href="{{selectedItemInfos.url}}" target="_blank">{{selectedItemInfos.url}}</a></span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                
+                <md-button class="md-icon-button md-raised button-open-sidenav" aria-label="Ouvrir la liste des établissements" ng-click="toggleSideNav()" ng-show="selectedItemInfos">
+                    <md-icon md-font-icon="ion-android-menu"></md-icon>
+                </md-button>
+
                 <leaflet width="100%" defaults="defaults" lf-center="center" geojson="geojson"></leaflet>
             </div>
+
+            <md-sidenav class="md-sidenav-right" md-component-id="right" md-whiteframe="1" md-disable-backdrop="">
+                <md-toolbar class="md-primary md-hue-3">
+                    <div class="md-toolbar-tools">
+                        <h2 class="toolbar-title">Établissements</h2>
+                        <span flex=""></span>
+                        <md-button class="md-icon-button" aria-label="Fermer la liste des établissements" ng-click="toggleSideNav()">
+                            <md-icon md-font-icon="ion-android-close"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content>
+                    <md-list class="list-etablissements" flex="">
+                        <md-subheader> {{(selectedItem.nom_officiel_cs || selectedItem.descr)}}</md-subheader>
+                        <md-list-item ng-repeat="e in listeEtablissements" class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3 title="{{e.nom}}">{{e.nom}}</h3>
+                                <p>
+                                    <address>
+                                        {{e.adresse.adr}}<br>
+                                        {{e.adresse.municipalite}}, QC<br>
+                                        {{e.adresse.cp}}
+                                    </address>
+                                </p>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+
         </md-content>
+
     </section>
-    
+
     <!-- Angular Material requires Angular.js Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
 
     <!-- Leaflet -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.js"></script>
     <script src="https://rawgit.com/nmccready/angular-simple-logger/master/dist/angular-simple-logger.min.js"></script>
-    <script src="https://rawgit.com/angular-ui/ui-leaflet/master/dist/ui-leaflet.min.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/ui-leaflet/v2.0.0/dist/ui-leaflet.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
-    <script src="https://rawgit.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/leaflet.markercluster.js"></script>
 
     <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc3/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 
     <!-- Angular Application -->
     <script src="js/app.js"></script>
