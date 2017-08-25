@@ -25,7 +25,7 @@ server.set('etag', 'strong');
 server.use(compression({threshold:0})); 
 server.use(express.static(__dirname + '/public',{maxAge: 86400000}));
 
-server.all('/api/*', function(req, res, next) {
+server.get('/api/*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();

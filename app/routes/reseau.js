@@ -19,7 +19,7 @@ function fnGetReseau(req, res, next, sType) {
             statusCode: 404,
             parameters: req.params,
             error: {
-                message: 'Aucun réseau trouvée.'
+                message: 'Aucun réseau trouvé.'
             }
         });
     }
