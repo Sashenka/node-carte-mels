@@ -2,7 +2,7 @@ var redis = require('redis');
 require('redis-streams')(redis);
 
 //process.env.REDIS_URL
-var client = redis.createClient({
+var client = redis.createClient(process.env.REDIS_URL, {
     return_buffers: true
 });
 
